@@ -36,6 +36,6 @@ def build():
         values={'title':meta.get('title','BioAI Tech'),'description':meta.get('description','AI in life science'),'path':path,'page_class':'home' if slug=='index' else 'prose-page','content':markdown(body),'year':str(datetime.now().year)}; page=template
         for key,value in values.items(): page=page.replace('{{ '+key+' }}',value)
         target.write_text(page)
-    shutil.copy(ROOT/'CNAME',DIST/'CNAME'); (DIST/'.nojekyll').touch(); (DIST/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: https://bioaitech.org/sitemap.xml\n'); (DIST/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://bioaitech.org/</loc></url><url><loc>https://bioaitech.org/privacy/</loc></url></urlset>')
+    shutil.copy(ROOT/'CNAME',DIST/'CNAME'); (DIST/'.nojekyll').touch(); (DIST/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: https://bioaitech.org/sitemap.xml\n'); (DIST/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://bioaitech.org/</loc></url><url><loc>https://bioaitech.org/pna-graph-neural-network/</loc></url><url><loc>https://bioaitech.org/privacy/</loc></url></urlset>')
     print(f'Built {len(list(CONTENT.glob("*.md")))} pages in {DIST}')
 if __name__=='__main__': build()
