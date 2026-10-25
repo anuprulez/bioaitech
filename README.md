@@ -1,20 +1,81 @@
 # BioAI Tech
 
-Python + Markdown source for [bioaitech.org](https://bioaitech.org).
+The source code for [bioaitech.org](https://bioaitech.org), a lightweight static website focused on artificial intelligence in life science.
 
-## Develop
+The site is built with Python, Markdown, HTML, CSS, and vanilla JavaScript. It has no third-party runtime dependencies and is deployed automatically through GitHub Pages.
 
-Edit `content/*.md`, then run:
+## Features
+
+- Markdown-based page content
+- Shared HTML templates
+- Responsive, accessible design
+- Automated sitemap and `robots.txt` generation
+- Automated deployment with GitHub Actions
+- No JavaScript framework or package manager required
+
+## Project structure
+
+```text
+.
+├── content/               # Page content written in Markdown
+├── static/                # Styles, scripts, icons, and social assets
+├── templates/             # Shared HTML templates
+├── scripts/build.sh       # Build entry point
+├── build.py               # Static-site generator
+├── CNAME                  # GitHub Pages custom-domain declaration
+└── .github/workflows/     # Deployment workflow
+```
+
+Generated files are written to `dist/`. This directory is excluded from version control.
+
+## Requirements
+
+- Python 3.10 or newer
+- A POSIX-compatible shell
+
+No additional Python packages are required.
+
+## Local development
+
+Build the site:
 
 ```bash
 ./scripts/build.sh
+```
+
+Start a local development server:
+
+```bash
 python3 -m http.server 8000 --directory dist
 ```
 
-No third-party Python packages are required.
+Open [http://localhost:8000](http://localhost:8000) in a browser.
 
-## Deploy to the domain
+After changing content, templates, or static assets, run the build command again and refresh the page.
 
-Push `main`; the GitHub Actions workflow builds and deploys to GitHub Pages. In repository **Settings → Pages**, choose **GitHub Actions** as the source. At your DNS provider, add four A records for host `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, and `185.199.111.153`. Add a CNAME record for `www` pointing to `anuprulez.github.io`. Remove conflicting records, wait for DNS propagation, then enable **Enforce HTTPS** in Pages.
+## Editing content
 
-The tracked `CNAME` preserves the custom domain. Content is in `content/`, layout in `templates/`, assets in `static/`, and the generated (ignored) site in `dist/`.
+Page content lives in `content/`:
+
+- `content/index.md` — home page
+- `content/privacy.md` — privacy page
+
+The shared document layout and metadata are defined in `templates/base.html`. Visual styling and browser behavior live in `static/style.css` and `static/main.js`.
+
+## Deployment
+
+Push changes to the `main` branch. The GitHub Actions workflow builds the project and deploys the generated `dist/` directory to GitHub Pages.
+
+Deployment progress is available in the repository's **Actions** tab.
+
+## Build output
+
+The build process creates:
+
+- Rendered HTML pages
+- Static assets
+- `robots.txt`
+- `sitemap.xml`
+- GitHub Pages metadata
+
+To verify a production build locally, run `./scripts/build.sh` and serve the result using the command above.
